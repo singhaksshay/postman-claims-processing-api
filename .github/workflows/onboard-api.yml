@@ -1,0 +1,33 @@
+name: Onboard Claims Processing API
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'specs/claims-processing-api-openapi.yaml'
+      - '.github/workflows/onboard-api.yml'
+
+jobs:
+  onboard:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: postman-cs/postman-api-onboarding-action@v0
+        with:
+          project-name: claims-processing-api
+          domain: insurance
+          domain-code: INS
+          requester-email: singhaksshay@icloud.com
+          spec-url: https://raw.githubusercontent.com/singhaksshay/postman-claims-processing-api/main/specs/claims-processing-api-openapi.yaml
+          environments-json: '["prod","staging","dev"]'
+          env-runtime-urls-json: '{"prod":"https://claims-api.example.com/v3","staging":"https://claims-api-staging.example.com/v3","dev":"https://claims-api-dev.example.com/v3"}'
+          generate-ci-workflow: false
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-access-token: ${{ secrets.POSTMAN_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          gh-fallback-token: ${{ secrets.GH_FALLBACK_TOKEN }}
