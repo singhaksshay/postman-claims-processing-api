@@ -1,0 +1,37 @@
+type: http
+name: Get settlement status
+url: '{{baseUrl}}/claims/:claimId/settlement'
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: claimId
+    value: string
+examples:
+  - response:
+      statusCode: 200
+      statusText: OK
+      body:
+        type: json
+        content: |-
+          {
+            "claimId": "string",
+            "amount": 329.8217696460681,
+            "paymentMethod": "string",
+            "status": "processing",
+            "initiatedAt": "1963-12-24T06:03:19.914Z",
+            "completedAt": "1970-10-26T21:40:01.274Z",
+            "referenceNumber": "string"
+          }
+      headers:
+        - key: Content-Type
+          value: application/json
+    name: Settlement details
+  - response:
+      statusCode: 404
+      statusText: Not Found
+      body:
+        type: text
+        content: ''
+    name: No settlement found for this claim

@@ -1,0 +1,72 @@
+type: http
+name: Submit adjudication decision
+url: '{{baseUrl}}/claims/:claimId/adjudicate'
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: claimId
+    value: string
+body:
+  type: json
+  content: |-
+    {
+      "decision": "partial_approval",
+      "approvedAmount": 9874.489912063695,
+      "adjusterNotes": "string",
+      "denialReason": "string",
+      "isAutomated": false
+    }
+scripts:
+  - type: afterResponse
+    code:
+      - // [Smoke] Auto-generated test assertions
+      - pm.test('Status code is successful (2xx)', function () {
+      - '    pm.response.to.be.success;'
+      - '});'
+      - pm.test('Response time is acceptable', function () {
+      - '    var threshold = parseInt(pm.environment.get(''RESPONSE_TIME_THRESHOLD'') || ''2000'', 10);'
+      - '    pm.expect(pm.response.responseTime).to.be.below(threshold);'
+      - '});'
+      - pm.test('Response body is not empty', function () {
+      - '    if (pm.response.code !== 204) {'
+      - '        var body = pm.response.text();'
+      - '        pm.expect(body.length).to.be.above(0);'
+      - '    }'
+      - '});'
+    language: text/javascript
+examples:
+  - response:
+      statusCode: 200
+      statusText: OK
+      body:
+        type: json
+        content: |-
+          {
+            "claimId": "string",
+            "decision": "string",
+            "approvedAmount": 8711.222712535966,
+            "adjudicatedAt": "2024-01-20T05:09:43.800Z",
+            "adjusterNotes": "string"
+          }
+      headers:
+        - key: Content-Type
+          value: application/json
+    name: Adjudication recorded
+  - response:
+      statusCode: 404
+      statusText: Not Found
+      body:
+        type: text
+        content: ''
+    name: Claim not found
+  - response:
+      statusCode: 409
+      statusText: Conflict
+      body:
+        type: text
+        content: ''
+    name: Claim already adjudicated

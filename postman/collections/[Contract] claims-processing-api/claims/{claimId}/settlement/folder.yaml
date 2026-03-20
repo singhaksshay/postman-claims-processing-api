@@ -1,0 +1,5 @@
+type: folder
+name: settlement
+items:
+  - ref: ./Process claim settlement.request.yaml
+  - ref: ./Get settlement status.request.yaml

@@ -1,0 +1,10 @@
+workspace:
+  id: 4a2e6f52-18d8-4878-b4b3-816c0c2a6623
+cloudResources:
+  collections:
+    ../postman/collections/[Baseline] claims-processing-api: 53321676-f72c56c1-dae3-4e94-89db-944aacd35b41
+    ../postman/collections/[Smoke] claims-processing-api: 53321676-e9905389-eda7-460f-917b-6d49c50ccd15
+    ../postman/collections/[Contract] claims-processing-api: 53321676-36946b2a-1142-425e-a47d-d097fa4de9ee
+localResources:
+  specs:
+    - ../index.yaml

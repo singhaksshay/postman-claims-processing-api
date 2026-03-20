@@ -1,0 +1,6 @@
+type: folder
+name: '{claimId}'
+items:
+  - ref: ./adjudicate/folder.yaml
+  - ref: ./settlement/folder.yaml
+  - ref: ./Get claim details.request.yaml

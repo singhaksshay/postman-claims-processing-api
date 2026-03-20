@@ -1,0 +1,43 @@
+$schema: https://schema.postman.com/json/draft-2020-12/collection/v3.0.0/
+type: collection
+name: '[Baseline] claims-processing-api'
+description: |-
+  API for managing insurance claims from initial filing through adjudication
+  and settlement. Handles property, auto, and liability claims across
+  multiple lines of business.
+
+  **Authentication:**
+  - External integrations: OAuth 2.0 (Bearer token)
+  - Internal services: API key (X-API-Key header)
+
+  **Rate Limits:**
+  - Standard: 150 requests/minute
+  - File upload: 20 requests/minute
+
+  **Note:** This service runs on a mixed Lambda/ECS infrastructure and uses
+  GitLab CI for deployments. CI/CD integration patterns differ from the
+  Payments and Lending domains which use GitHub Actions.
+
+
+  Contact Support:
+   Name: Insurance Engineering Team
+   Email: insurance-engineering@example.com
+id: f72c56c1-dae3-4e94-89db-944aacd35b41
+auth:
+  type: apikey
+  credentials:
+    - key: key
+      value: X-API-Key
+      type: string
+    - key: value
+      value: '{{apiKey}}'
+      type: string
+    - key: in
+      value: header
+      type: string
+variables:
+  - key: baseUrl
+    value: https://claims-api.example.com/v3
+items:
+  - ref: ./claims/folder.yaml
+  - ref: ./health/folder.yaml

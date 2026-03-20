@@ -1,0 +1,85 @@
+type: http
+name: File a new claim
+url: '{{baseUrl}}/claims'
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "policyId": "pol_auto_12345",
+      "lineOfBusiness": "auto",
+      "incidentDate": "2026-02-15",
+      "description": "Rear-end collision at intersection",
+      "estimatedDamage": 8500,
+      "claimantContact": {
+        "name": "Jane Smith",
+        "phone": "+1-555-0123",
+        "email": "jane.smith@example.com"
+      }
+    }
+examples:
+  - response:
+      statusCode: 201
+      statusText: Created
+      body:
+        type: json
+        content: |-
+          {
+            "id": "string",
+            "policyId": "string",
+            "lineOfBusiness": "string",
+            "status": "triaged",
+            "incidentDate": "2005-05-02",
+            "description": "string",
+            "estimatedDamage": 2712.026070097411,
+            "filedAt": "1956-11-18T11:56:15.309Z",
+            "updatedAt": "2003-01-18T15:18:47.369Z",
+            "assignedAdjuster": "string",
+            "adjudication": {
+              "claimId": "string",
+              "decision": "string",
+              "approvedAmount": 3691.2033623553707,
+              "adjudicatedAt": "2022-07-29T02:14:44.298Z",
+              "adjusterNotes": "string"
+            },
+            "settlement": {
+              "claimId": "string",
+              "amount": 4206.481874110619,
+              "paymentMethod": "string",
+              "status": "completed",
+              "initiatedAt": "2004-03-28T22:16:03.205Z",
+              "completedAt": "1992-12-07T00:31:51.106Z",
+              "referenceNumber": "string"
+            }
+          }
+      headers:
+        - key: Content-Type
+          value: application/json
+    name: Claim filed successfully
+  - response:
+      statusCode: 400
+      statusText: Bad Request
+      body:
+        type: json
+        content: |-
+          {
+            "code": "string",
+            "message": "string",
+            "details": {}
+          }
+      headers:
+        - key: Content-Type
+          value: application/json
+    name: Invalid claim data
+  - response:
+      statusCode: 409
+      statusText: Conflict
+      body:
+        type: text
+        content: ''
+    name: Duplicate claim for this incident

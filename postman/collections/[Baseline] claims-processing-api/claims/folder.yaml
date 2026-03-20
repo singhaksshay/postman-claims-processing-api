@@ -1,0 +1,6 @@
+type: folder
+name: claims
+items:
+  - ref: ./{claimId}/folder.yaml
+  - ref: ./File a new claim.request.yaml
+  - ref: ./List claims.request.yaml
